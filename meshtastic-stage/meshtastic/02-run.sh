@@ -17,8 +17,13 @@ echo "ASSET_URL $ASSET_URL"
 FILE_NAME=meshtasticd_arm64.deb
 
 curl -L -o $FILE_NAME $ASSET_URL
-apt install -y -f libyaml-cpp-dev=0.7.0
+
+apt list -a libyaml-cpp-dev
+apt list -a libulfius-dev
+
+apt install -y -f libyaml-cpp-dev=0.7.0+dfsg-8
 apt install -y -f libulfius-dev=2.7
+
 apt install -y -f ./$FILE_NAME
 
 apt clean
