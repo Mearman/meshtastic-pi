@@ -48,14 +48,16 @@ FILE_NAME=meshtasticd_arm64.deb
 curl -L -o $FILE_NAME $ASSET_URL
 
 # list versions of libyaml-cpp-dev
-apt madison libyaml-cpp-dev
+apt-cache madison libyaml-cpp-dev
 
 # list versions of libulfius-dev
-apt madison libulfius-dev
+apt-cache madison libulfius-dev
 
-apt install -y -f libyaml-cpp-dev=0.7.0+dfsg-8
-apt install -y -f libulfius-dev=2.7
+apt install -y -f libyaml-cpp-dev || true
+apt install -y -f libulfius-dev || true
+apt --fix-broken install -y || true
 
-apt install -y -f ./$FILE_NAME
+# apt install -y -f ./$FILE_NAME
+dpkg -i $FILE_NAME --force-depends
 
 apt clean
