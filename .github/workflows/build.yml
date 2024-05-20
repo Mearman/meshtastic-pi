@@ -47,3 +47,11 @@ jobs:
           echo "IMAGE_PATH=$IMAGE_PATH" >> $GITHUB_ENV
           echo "IMAGE_DIR=$IMAGE_DIR" >> $GITHUB_ENV
           ls -lah $IMAGE_PATH
+
+      ########################################
+
+      - name: Upload lite image
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: ${{ env.IMAGE_NAME }}-lite
+          path: ${{ steps.build.outputs.image-path }}/*.lite.img.gz
