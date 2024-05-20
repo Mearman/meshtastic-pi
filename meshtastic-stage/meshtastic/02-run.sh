@@ -58,6 +58,6 @@ apt install -y -f libulfius-dev || true
 apt --fix-broken install -y || true
 
 # apt install -y -f ./$FILE_NAME
-dpkg -i $FILE_NAME --force-depends
+dpkg --force-depends -i $FILE_NAME
 
 apt clean
