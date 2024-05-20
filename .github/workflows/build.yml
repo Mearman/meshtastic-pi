@@ -23,7 +23,7 @@ jobs:
         id: build
         with:
           export-last-stage-only: false
-          stage-list: stage0 stage1 stage2 ./meshtastic-stage stage3
+          stage-list: stage0 stage1 stage2 ./meshtastic-stage stage3 stage4
           verbose-output: true
 
           release: bookworm
