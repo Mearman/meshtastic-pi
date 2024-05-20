@@ -1,0 +1,49 @@
+name: Build pi-gen image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+# see https://github.com/usimd/pi-gen-action
+jobs:
+  pi-gen:
+    env:
+      IMAGE_NAME: meshtastic-pi
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+        ########################################
+
+      - name: Build base image
+        uses: usimd/pi-gen-action@v1
+        id: build
+        with:
+          export-last-stage-only: false
+          stage-list: stage0 stage1 ./meshtastic-stage stage2 stage3
+          verbose-output: true
+
+          release: bookworm
+          # pi-gen-version: arm64
+
+          hostname: meshtastic-pi
+          username: pi
+          password: raspberry
+          enable-ssh: 1
+
+          image-name: ${{ env.IMAGE_NAME }}
+          compression: gz
+          compression-level: 6
+
+      ########################################
+
+      - name: Check image path
+        run: |
+          IMAGE_PATH=$(realpath ${{ steps.build.outputs.image-path }})
+          IMAGE_DIR=$(dirname $IMAGE_PATH)
+          echo "IMAGE_PATH=$IMAGE_PATH" >> $GITHUB_ENV
+          echo "IMAGE_DIR=$IMAGE_DIR" >> $GITHUB_ENV
+          ls -lah $IMAGE_PATH

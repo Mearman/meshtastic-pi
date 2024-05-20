@@ -1,0 +1,8 @@
+libgpiod-dev
+libyaml-cpp-dev
+libbluetooth-dev
+
+openssl
+libssl-dev
+libulfius-dev
+liborcania-dev
