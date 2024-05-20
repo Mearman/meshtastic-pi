@@ -47,11 +47,16 @@ jobs:
       ########################################
 
       - name: Check image path
+        id: image-paths
         run: |
           IMAGE_PATH=$(realpath ${{ steps.build.outputs.image-path }})
+          echo "IMAGE_PATH=$IMAGE_PATH"
+          echo "IMAGE_PATH=$IMAGE_PATH" >> $GITHUB_OUTPUT
+
           IMAGE_DIR=$(dirname $IMAGE_PATH)
-          echo "IMAGE_PATH=$IMAGE_PATH" >> $GITHUB_ENV
-          echo "IMAGE_DIR=$IMAGE_DIR" >> $GITHUB_ENV
+          echo "IMAGE_DIR=$IMAGE_DIR"
+          echo "IMAGE_DIR=$IMAGE_DIR" >> $GITHUB_OUTPUT
+
           ls -lah $IMAGE_PATH
 
       ########################################
@@ -60,4 +65,4 @@ jobs:
         uses: actions/upload-artifact@v4.3.3
         with:
           name: ${{ env.IMAGE_NAME }}-lite
-          path: ${{ steps.build.outputs.image-path }}/*-lite.img.gz
+          path: ${{ steps.image-paths.outputs.IMAGE_DIR }}/*-lite.img.gz
