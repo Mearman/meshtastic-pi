@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+apt update && apt install -y curl jq
+
 VERSION=${1:-prerelease}
 
 if [ "$VERSION" == "latest" ]; then
