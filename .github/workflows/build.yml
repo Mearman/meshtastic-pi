@@ -60,4 +60,4 @@ jobs:
         uses: actions/upload-artifact@v4.3.3
         with:
           name: ${{ env.IMAGE_NAME }}-lite
-          path: ${{ steps.build.outputs.image-path }}/*.lite.img.gz
+          path: ${{ steps.build.outputs.image-path }}/*-lite.img.gz
