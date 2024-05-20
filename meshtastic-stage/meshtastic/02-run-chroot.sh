@@ -57,7 +57,6 @@ apt install -y -f libyaml-cpp-dev || true
 apt install -y -f libulfius-dev || true
 apt --fix-broken install -y || true
 
-# apt install -y -f ./$FILE_NAME
-dpkg --force-depends -i $FILE_NAME
+dpkg --force-all -i $FILE_NAME
 
 apt clean
